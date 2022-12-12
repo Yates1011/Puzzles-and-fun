@@ -8,9 +8,10 @@ Created on Sun Dec 11 13:14:56 2022
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+from mpl_toolkits.mplot3d import Axes3D
 
 # Set up the initial grid
-grid = np.random.randint(0, 2, (10, 10))
+grid = np.random.randint(0, 2, (10, 10, 10))
 
 # Define a function to update the grid for the next generation
 def update(data):
@@ -18,10 +19,12 @@ def update(data):
     new_grid = grid.copy()
     for i in range(1, grid.shape[0]-1):  # Change this line to avoid out-of-bounds errors (rows)
         for j in range(1, grid.shape[1]-1):  # Change this line to avoid out-of-bounds errors
-            # Count the number of live neighbors
-            live_neighbours = (grid[i-1, j-1] + grid[i-1, j] + grid[i-1, j+1] +
-                              grid[i, j-1] + grid[i, j+1] +
-                              grid[i+1, j-1] + grid[i+1, j] + grid[i+1, j+1])
+            for k in range(1, grid.shape[2]-1):  # Add a third dimension to the loop
+                # Count the number of live neighbors
+                live_neighbours = (grid[i-1, j-1, k-1] + grid[i-1, j-1, k] + grid[i-1, j-1, k+1] +
+                                  grid[i-1, j, k-1] + grid[i-1, j, k] + grid[i-1, j, k+1] +
+                                  grid[i-1, j+1, k-1] + grid[i-1, j+1, k] + grid[i-1, j+1, k+1] +
+                                  grid[i, j-1, k-1]
             # Apply the rules of the game of life
             if grid[i, j] == 0 and live_neighbours == 3:
                 new_grid[i, j] = 1
