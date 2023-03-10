@@ -1,7 +1,9 @@
 """
 A script to plot a helix using plotly.
 
-I have just discovered plotly and in the process of converting some script to see how the end up. 
+I have just discovered plotly and in the process of converting some scripts to see how they end up. 
+
+https://plotly.com/
 """
 import plotly.graph_objects as go
 import numpy as np
